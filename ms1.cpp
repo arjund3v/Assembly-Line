@@ -16,7 +16,7 @@
 using namespace std;
 using namespace sdds;
 
-static bool loadStations(const char*, vector<Station>&);
+//static bool loadStations(const char*, vector<Station>&);
 
 int main(int argc, char** argv)
 {
@@ -30,19 +30,21 @@ int main(int argc, char** argv)
     }
 
     //**************//
-    vector<Station> theStations;
+    //vector<Station> theStations;
     try
     {
         Utilities::setDelimiter(',');
-        loadStations(argv[1], theStations);
+        //loadStations(argv[1], theStations);
         Utilities::setDelimiter('|');
-        loadStations(argv[2], theStations);
+        //loadStations(argv[2], theStations);
     }
     catch (const string& err)
     {
         cerr << err << '\n';
         exit(2);
     }
+
+    /*
 
     cout << "========================================" << endl;
     cout << "=         Stations (summary)           =" << endl;
@@ -101,10 +103,11 @@ int main(int argc, char** argv)
             catch (...) { cout << "   ERROR: No token.\n"; }
         }
     }
+     */
 
     return 0;
 }
-
+/*
 bool loadStations(const char* filenameSt, vector<Station>& theStations)
 {
     std::ifstream file(filenameSt);
@@ -122,4 +125,5 @@ bool loadStations(const char* filenameSt, vector<Station>& theStations)
     }
     file.close();
     return true;
-}
+};
+ */
