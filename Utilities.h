@@ -12,6 +12,7 @@ namespace sdds {
         void setFieldWidth(size_t newWidth);
         size_t getFieldWidth() const;
         std::string extractToken(const std::string& str, size_t& next_pos, bool& more);
+        std::string removeWhitespaces(std::string str)const;
         static void setDelimiter(char newDelimiter);
         static char getDelimiter();
     };
