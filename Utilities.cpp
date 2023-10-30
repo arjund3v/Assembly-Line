@@ -1,3 +1,11 @@
+// Name: Arjun Saini
+// Seneca Student ID: 106182223
+// Seneca email: asaini82@myseneca.ca
+// Date of completion: 29/03/2023
+//
+// I confirm that I am the only author of this file
+//   and the content was created entirely by me.
+
 #include <iostream>
 #include <string>
 #include "Utilities.h"
