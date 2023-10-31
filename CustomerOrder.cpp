@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "Utilities.h"
 #include "CustomerOrder.h"
 
@@ -37,8 +38,8 @@ namespace sdds {
             m_lstItem[i] = new Item(items[i]);
         };
 
-        if (m_widthField < u.getFieldWidth()){
-            m_widthField = u.getFieldWidth();
+        if (CustomerOrder::m_widthField < u.getFieldWidth()){
+            CustomerOrder::m_widthField = u.getFieldWidth();
         }
 
     };
@@ -55,11 +56,10 @@ namespace sdds {
         if (this != &other){
             m_name = other.m_name;
             m_product = other.m_product;
-            m_widthField = other.m_widthField;
 
             for (auto i = 0; i < m_cntItem; ++i) {
                 delete m_lstItem[i];
-                m_lstItem = nullptr;
+                m_lstItem[i] = nullptr;
             }
 
             delete[] m_lstItem;
@@ -72,7 +72,6 @@ namespace sdds {
             other.m_cntItem = 0;
             other.m_product = "";
             other.m_name = "";
-            other.m_widthField = 0;
         }
         return *this;
     };
@@ -93,15 +92,40 @@ namespace sdds {
     };
 
     bool CustomerOrder::isItemFilled(const std::string& itemName) const{
+        bool filled{};
 
+        for (auto i = 0; i < m_cntItem; ++i) {
+            if (m_lstItem[i]->m_itemName == itemName){
+                if (m_lstItem[i]->m_isFilled){
+                    filled = true;
+                } else {
+                    filled = false;
+                    break;
+                }
+            }
+        }
+
+
+        return filled;
     };
 
-    void CustomerOrder::fillItem(Station& station, std::ostream& os){
-        
+    void CustomerOrder::fillItem(Station& station, std::ostream& os) {
+
+
+    //os << "    Filled " << m_name << " " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
+    //os << "    Unable to fill " << m_name << "  " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
+
     };
 
     void CustomerOrder::display(std::ostream& os) const{
-
+        if (os) {
+            os << m_name << " - " << m_product << std::endl;
+            for (auto i = 0; i < m_cntItem; ++i) {
+                os << "[" << std::left << std::setw(6) << std::setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
+                os << std::left << std::setw(static_cast<int>(m_widthField)) << std::setfill(' ') << m_lstItem[i]->m_itemName << " - ";
+                os << std::right << (m_lstItem[i]->m_isFilled ? "FILLED" : "TO BE FILLED") << std::endl;
+            }
+        }
     };
 
     CustomerOrder::~CustomerOrder(){
