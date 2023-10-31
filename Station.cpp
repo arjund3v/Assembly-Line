@@ -23,7 +23,7 @@ namespace sdds {
         m_numItems = std::stoul(u.extractToken(rec, pos, more));
 
 
-        if (m_widthField < u.getFieldWidth()){
+        if (m_widthField < static_cast<int>(u.getFieldWidth())){
             m_widthField = u.getFieldWidth();
         };
 

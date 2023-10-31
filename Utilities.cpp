@@ -57,7 +57,7 @@ namespace sdds {
 
 
                 // Update the width field
-                if (m_widthField < temp.length()){
+                if (m_widthField < static_cast<int>(temp.length())){
                     m_widthField = temp.length();
                 }
 
