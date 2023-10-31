@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <vector>
 #include "Utilities.h"
 #include "CustomerOrder.h"
 
@@ -78,42 +79,46 @@ namespace sdds {
 
     bool CustomerOrder::isOrderFilled()const{
 
-        bool filled = false;
         for (auto i = 0; i < m_cntItem; ++i) {
-            if (m_lstItem[i]->m_isFilled){
-                filled = true;
-            } else {
-                filled = false;
-                break;
+            if (!m_lstItem[i]->m_isFilled){
+                return false;
             }
         }
 
-        return filled;
+        return true;
     };
 
     bool CustomerOrder::isItemFilled(const std::string& itemName) const{
-        bool filled{};
 
         for (auto i = 0; i < m_cntItem; ++i) {
             if (m_lstItem[i]->m_itemName == itemName){
-                if (m_lstItem[i]->m_isFilled){
-                    filled = true;
-                } else {
-                    filled = false;
-                    break;
+                if (!m_lstItem[i]->m_isFilled){
+                    return false;
                 }
             }
         }
 
-
-        return filled;
+        return true;
     };
 
     void CustomerOrder::fillItem(Station& station, std::ostream& os) {
 
+        bool filled = false;
 
-    //os << "    Filled " << m_name << " " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
-    //os << "    Unable to fill " << m_name << "  " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
+        for (auto i = 0; i < m_cntItem && !filled; i++) {
+            if (m_lstItem[i]->m_itemName == station.getItemName() && !m_lstItem[i]->m_isFilled){
+                if (station.getQuantity() > 0){
+                    station.updateQuantity();
+                    m_lstItem[i]->m_serialNumber = station.getNextSerialNumber();
+                    m_lstItem[i]->m_isFilled = true;
+                    os << "    Filled " << m_name << ", " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
+                    filled = true;
+                }
+            } else if (m_lstItem[i]->m_itemName == station.getItemName() && m_lstItem[i]->m_isFilled){
+                os << "    Unable to fill " << m_name << ",  " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
+                break;
+            }
+        }
 
     };
 
@@ -124,7 +129,7 @@ namespace sdds {
                 os << "[" << std::left << std::setw(6) << std::setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
                 os << std::left << std::setw(static_cast<int>(m_widthField)) << std::setfill(' ') << m_lstItem[i]->m_itemName << " - ";
                 os << std::right << (m_lstItem[i]->m_isFilled ? "FILLED" : "TO BE FILLED") << std::endl;
-            }
+            };
         }
     };
 
