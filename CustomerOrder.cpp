@@ -43,7 +43,7 @@ namespace sdds {
         m_lstItem = new Item*[m_cntItem];
 
         // For each pointer in the array we make it point to a Item object
-        for (auto i = 0; i < m_cntItem; ++i) {
+        for (size_t i = 0; i < m_cntItem; ++i) {
             m_lstItem[i] = new Item(items[i]);
         };
 
@@ -66,7 +66,7 @@ namespace sdds {
             m_name = other.m_name;
             m_product = other.m_product;
 
-            for (auto i = 0; i < m_cntItem; ++i) {
+            for (size_t i = 0; i < m_cntItem; ++i) {
                 delete m_lstItem[i];
                 m_lstItem[i] = nullptr;
             }
@@ -86,7 +86,7 @@ namespace sdds {
     };
 
     bool CustomerOrder::isOrderFilled()const{
-        for (auto i = 0; i < m_cntItem; ++i) {
+        for (size_t i = 0; i < m_cntItem; ++i) {
             if (!m_lstItem[i]->m_isFilled){
                 return false;
             }
@@ -97,7 +97,7 @@ namespace sdds {
 
     bool CustomerOrder::isItemFilled(const std::string& itemName) const{
 
-        for (auto i = 0; i < m_cntItem; ++i) {
+        for (size_t i = 0; i < m_cntItem; ++i) {
             if (m_lstItem[i]->m_itemName == itemName){
                 if (!m_lstItem[i]->m_isFilled){
                     return false;
@@ -112,7 +112,7 @@ namespace sdds {
 
         bool filled = false;
 
-        for (auto i = 0; i < m_cntItem && !filled; i++) {
+        for (size_t i = 0; i < m_cntItem && !filled; i++) {
             if (m_lstItem[i]->m_itemName == station.getItemName() && !m_lstItem[i]->m_isFilled){
                 if (station.getQuantity() > 0){
                     station.updateQuantity();
@@ -132,7 +132,7 @@ namespace sdds {
     void CustomerOrder::display(std::ostream& os) const{
         if (os) {
             os << m_name << " - " << m_product << std::endl;
-            for (auto i = 0; i < m_cntItem; ++i) {
+            for (size_t i = 0; i < m_cntItem; ++i) {
                 os << "[" << std::left << std::setw(6) << std::setfill('0') << m_lstItem[i]->m_serialNumber << "] ";
                 os << std::left << std::setw(static_cast<int>(m_widthField)) << std::setfill(' ') << m_lstItem[i]->m_itemName << " - ";
                 os << std::right << (m_lstItem[i]->m_isFilled ? "FILLED" : "TO BE FILLED") << std::endl;
@@ -141,7 +141,7 @@ namespace sdds {
     };
 
     CustomerOrder::~CustomerOrder(){
-        for (auto i = 0; i < m_cntItem; ++i) {
+        for (size_t i = 0; i < m_cntItem; ++i) {
             delete m_lstItem[i];
             m_lstItem[i] = nullptr;
         }
