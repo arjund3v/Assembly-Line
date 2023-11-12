@@ -22,12 +22,13 @@ namespace sdds {
         inline static int m_idGen{};
     public:
         Station() = default;
-        Station(std::string rec);
+        Station(const std::string& rec);
         const std::string& getItemName() const;
         size_t getNextSerialNumber();
         size_t getQuantity() const;
         void updateQuantity();
         void display(std::ostream& os, bool full) const;
+        virtual ~Station();
     };
 
 }

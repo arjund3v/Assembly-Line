@@ -31,7 +31,7 @@ namespace sdds {
         inline static size_t m_widthField{};
     public:
         CustomerOrder() = default;
-        CustomerOrder(const std::string token);
+        CustomerOrder(const std::string& token);
         CustomerOrder(const CustomerOrder& other);
         CustomerOrder(CustomerOrder&& other) noexcept;
         CustomerOrder& operator=(const CustomerOrder& other) = delete;

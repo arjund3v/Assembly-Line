@@ -11,7 +11,7 @@
 #include "Utilities.h"
 
 namespace sdds {
-    Station::Station(std::string rec){
+    Station::Station(const std::string& rec){
         Utilities u{};
         size_t pos{};
         bool more = true;

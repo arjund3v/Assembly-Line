@@ -14,7 +14,7 @@
 
 namespace sdds {
 
-    CustomerOrder::CustomerOrder(const std::string token){
+    CustomerOrder::CustomerOrder(const std::string& token){
         // Initialize local variables
         Utilities u{};
         size_t pos{};

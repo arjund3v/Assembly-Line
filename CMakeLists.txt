@@ -9,4 +9,8 @@ add_executable(Assembly_Line ms3.cpp
         Station.cpp
         Station.h
         CustomerOrder.cpp
-        CustomerOrder.h)
+        CustomerOrder.h
+        Workstation.cpp
+        Workstation.h
+        LineManager.cpp
+        LineManager.h)
