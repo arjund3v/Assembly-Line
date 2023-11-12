@@ -1,3 +1,11 @@
+// Name: Arjun Saini
+// Seneca Student ID: 106182223
+// Seneca email: asaini82@myseneca.ca
+// Date of completion: 06/11/2023
+//
+// I confirm that I am the only author of this file
+//   and the content was created entirely by me.
+
 #include <iostream>
 #include <iomanip>
 #include <vector>
@@ -46,10 +54,10 @@ namespace sdds {
     };
 
     CustomerOrder::CustomerOrder(const CustomerOrder& other){
-        throw std::runtime_error("The copy assignment operator should not be used.");
+        throw std::logic_error("The copy assignment operator should not be used.");
     };
 
-    CustomerOrder::CustomerOrder(CustomerOrder&& other) noexcept{
+    CustomerOrder::CustomerOrder(CustomerOrder&& other) noexcept {
         *this = std::move(other);
     };
 
@@ -78,7 +86,6 @@ namespace sdds {
     };
 
     bool CustomerOrder::isOrderFilled()const{
-
         for (auto i = 0; i < m_cntItem; ++i) {
             if (!m_lstItem[i]->m_isFilled){
                 return false;
