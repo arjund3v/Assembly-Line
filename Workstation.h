@@ -11,7 +11,7 @@ namespace sdds {
     extern std::deque<CustomerOrder> g_completed;
     extern std::deque<CustomerOrder> g_incomplete;
 
-    class Workstation : Station {
+    class Workstation : public Station {
     private:
         std::deque<CustomerOrder> m_orders{};
         Workstation* m_pNextStation{};
@@ -29,7 +29,6 @@ namespace sdds {
         Workstation* getNextStation() const;
         void display(std::ostream& os) const;
         Workstation& operator+=(CustomerOrder&& newOrder);
-        ~Workstation() = default;
     };
 
 }

@@ -28,7 +28,6 @@ namespace sdds {
         size_t getQuantity() const;
         void updateQuantity();
         void display(std::ostream& os, bool full) const;
-        virtual ~Station();
     };
 
 }
