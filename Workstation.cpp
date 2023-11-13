@@ -1,4 +1,5 @@
 #include <iostream>
+#include <algorithm>
 #include "Workstation.h"
 
 namespace sdds {
@@ -12,11 +13,13 @@ namespace sdds {
     };
 
     void Workstation::fill(std::ostream& os){
-
+        if (!m_orders.empty()){
+            m_orders.front().fillItem(*this, os);
+        }
     };
 
     bool Workstation::attemptToMoveOrder(){
-        return true;
+
     };
 
     void Workstation::setNextStation(Workstation* station){
