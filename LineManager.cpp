@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
+#include <vector>
 #include "LineManager.h"
 #include "Utilities.h"
 
@@ -41,11 +42,11 @@ namespace sdds {
                     };
 
                     // Find both of the stations in the vector provided to us
-                    auto active = std::find_if(stations.begin(), stations.end(), [=](const Workstation *station) {
+                    auto active = std::find_if(stations.begin(), stations.end(), [=](const Workstation* station) {
                         return activeStationString == station->getItemName();
                     });
 
-                    auto next = std::find_if(stations.begin(), stations.end(), [=](const Workstation *station) {
+                    auto next = std::find_if(stations.begin(), stations.end(), [=](const Workstation* station) {
                         return nextStationString == station->getItemName();
                     });
 
@@ -59,8 +60,16 @@ namespace sdds {
                         (*active)->setNextStation(nullptr);
                 }
 
-                // Find the first station
-                m_firstStation = m_activeLine.front();
+                // Looking for the other whose next station is not equal to station
+                auto first = std::find_if(m_activeLine.begin(), m_activeLine.end(), [=](const Workstation* station){
+                    // We check to find which of the others do not equal the station in the outer loop
+                    return std::none_of(m_activeLine.begin(), m_activeLine.end(), [=](const Workstation* other){
+                        return other->getNextStation() == station;
+                    });
+                });
+
+                // We assign m_firstStation to the first node we found
+                m_firstStation = *first;
 
                 // Update the size
                 m_cntCustomerOrder = g_pending.size();
@@ -76,6 +85,22 @@ namespace sdds {
 
     void LineManager::reorderStations(){
 
+        // We initialize the temp vector to have the first station in the first position
+        std::vector<Workstation*> temp{};
+        temp.push_back(m_firstStation);
+
+        do {
+
+            // We find the next station, by going to the back of the vector.
+            // This works because each time we add a new item, its added to the back of the vector
+            auto next = temp.back()->getNextStation();
+            temp.push_back(next);
+
+            // Do this till the item at the end points to nothing indicating the last node
+        } while(temp.back()->getNextStation() != nullptr);
+
+        // Assign the active line to the ordered vector
+        m_activeLine = temp;
     };
 
     bool LineManager::run(std::ostream& os){
