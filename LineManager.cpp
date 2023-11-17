@@ -61,9 +61,9 @@ namespace sdds {
                 }
 
                 // Looking for the other whose next station is not equal to station
-                auto first = std::find_if(m_activeLine.begin(), m_activeLine.end(), [=](const Workstation* station){
+                auto first = std::find_if(m_activeLine.begin(), m_activeLine.end(), [=](const Workstation* station) {
                     // We check to find which of the others do not equal the station in the outer loop
-                    return std::none_of(m_activeLine.begin(), m_activeLine.end(), [=](const Workstation* other){
+                    return std::none_of(m_activeLine.begin(), m_activeLine.end(), [=](const Workstation* other) {
                         return other->getNextStation() == station;
                     });
                 });
@@ -76,20 +76,20 @@ namespace sdds {
 
 
             }
-        } catch (...){
-            throw std::string("An error occured in the LineManager Constructor...");
+        } catch (...) {
+            throw std::string("An error occurred in the LineManager Constructor...");
         }
 
 
     };
 
-    void LineManager::reorderStations(){
+    void LineManager::reorderStations() {
 
         // We initialize the temp vector to have the first station in the first position
         std::vector<Workstation*> temp{};
         temp.push_back(m_firstStation);
 
-        do {
+        do  {
 
             // We find the next station, by going to the back of the vector.
             // This works because each time we add a new item, its added to the back of the vector
@@ -103,12 +103,34 @@ namespace sdds {
         m_activeLine = temp;
     };
 
-    bool LineManager::run(std::ostream& os){
-        return true;
+    bool LineManager::run(std::ostream &os) {
+
+
+        static size_t calls = 0;
+
+        // represents number of calls to function
+        calls++;
+
+        os << "Line Manager Iteration: " << calls << std::endl;
+
+        if (!g_pending.empty()) {
+            *m_firstStation += std::move(g_pending.front());
+            g_pending.pop_front();
+        };
+
+        std::for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* station){
+            station->fill(os);
+        });
+
+        std::for_each(m_activeLine.begin(), m_activeLine.end(), [&](Workstation* station){
+           station->attemptToMoveOrder();
+        });
+
+        return m_cntCustomerOrder == g_completed.size() + g_incomplete.size();
     };
 
-    void LineManager::display(std::ostream& os) const{
-        for (auto& station : m_activeLine){
+    void LineManager::display(std::ostream &os) const {
+        for (auto& station: m_activeLine) {
             station->display(os);
         };
     };
