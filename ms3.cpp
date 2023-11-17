@@ -179,4 +179,4 @@ static void loadFromFile(const char* filename, vector<T*>& theCollection)
     }
 
     file.close();
-};
+}
