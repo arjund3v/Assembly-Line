@@ -63,6 +63,7 @@ namespace sdds {
 
     CustomerOrder& CustomerOrder::operator=(CustomerOrder&& other) noexcept {
         if (this != &other){
+
             m_name = other.m_name;
             m_product = other.m_product;
 
@@ -120,10 +121,9 @@ namespace sdds {
                     m_lstItem[i]->m_isFilled = true;
                     os << "    Filled " << m_name << ", " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
                     filled = true;
+                } else {
+                    os << "    Unable to fill " << m_name << ",  " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
                 }
-            } else if (m_lstItem[i]->m_itemName == station.getItemName() && m_lstItem[i]->m_isFilled){
-                os << "    Unable to fill " << m_name << ",  " << m_product << " " << "[" << m_lstItem[i]->m_itemName << "]" << std::endl;
-                break;
             }
         }
 
