@@ -1,0 +1,46 @@
+// Name: Arjun Saini
+// Seneca Student ID: 106182223
+// Seneca email: asaini82@myseneca.ca
+// Date of completion: 21/11/2023
+//
+// I confirm that I am the only author of this file
+//   and the content was created entirely by me.
+
+
+Overall Thoughts
+------------------------------------------------------------------------------------------------------------------------
+Overall i had a fun time with this project. It was pretty fun developing a full project using the skills ive learned
+throughout the course. I do have to say that out of all the projects from IPC to OOP, the IPC project was the best.
+Reason being, it felt like a application rather than a press run and the whole project just runs type thing. There was
+more interactivity. I think making something like that would've been really cool, personally i like interactive things
+because it makes me feel like im actually doing something. This entire project was just automated test cases.
+
+Process of Completion
+------------------------------------------------------------------------------------------------------------------------
+MS1 and MS2 were a piece of cake. I found them really easy and simple to complete. They were basically like small
+workshops. MS3 was a bit more difficult specifically the 2nd half with the line manager module. I had to think hard
+about how the entire system works together. I also later realized after building the line manager class, it kind of
+reminded me of the linked list data structure. We had a first node, then each node pointed to another node till we get
+to the end. But we also had a vector. MS3's constructor was pretty easy as well because we have had so much practice
+with I/O in terms of file streams. I think the weird part for me was finding the first element aka the bed. I wasn't
+able to use regular for loops so it kind of threw me off, but I ended up reviewing some of the STL Algorithms, I was able
+to figure out which algorithm I needed to use. Then after reviewing the way that the stations work i was able to piece
+everything together.
+
+Course Thoughts
+------------------------------------------------------------------------------------------------------------------------
+This course was pretty fun, I enjoyed it even though this semester was very workload heavy. I learned a lot and finally
+felt like i could put c++ on my resume 😂. The workshops were cool, and im glad there were some challenges that I had
+to overcome because it made me feel like i learned something. The one thing I hate is DEBUGGING AND WALKTRHOUGH
+QUESTIONS!! Specifically debugging, i don't know why but i did terrible on the midterm in terms of the debugging. I am
+very good at looking at code, but I think because there was no syntax highlighting or the errors were just those that
+are highlighted red in the ide i couldn't find them. But I hate those questions on the tests. They suck. The walkthroughs
+aren't as bad, but the debugging questions suck.
+
+
+Comments on Hong (hehe)
+------------------------------------------------------------------------------------------------------------------------
+Hong made this course very enjoyable. The lecture slides were really good and easy to follow along with, and the
+lectures themselves were interactive. Made the professor seem more humane. I was also force to work for the 10/10 on
+workshops which was nice because it made me feel like i earned those grades. Thank for teaching me valuable things Hong,
+I appreciate it. I also enjoyed the random rants before lectures.
