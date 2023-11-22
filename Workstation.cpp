@@ -1,3 +1,10 @@
+// Name: Arjun Saini
+// Seneca Student ID: 106182223
+// Seneca email: asaini82@myseneca.ca
+// Date of completion: 18/11/2023
+//
+// I confirm that I am the only author of this file
+//   and the content was created entirely by me.
 #include <iostream>
 #include <algorithm>
 #include "Workstation.h"
@@ -25,16 +32,16 @@ namespace sdds {
         // First check if the order has been filled and the inventory is = 0
         // If the order is filled (no more service required) OR insufficient quantity, move to the next station
         if (!m_orders.empty()) {
-            if (m_orders.front().isItemFilled(getItemName()) || !getQuantity()) {
+            if (m_orders.front().isItemFilled(getItemName()) || getQuantity() == 0) {
 
                 // Check if the next station is not NULLPTR
-                if (m_pNextStation) {
+                if (m_pNextStation != nullptr) {
                     *m_pNextStation += std::move(m_orders.front());
                 } else {
 
                     /*
-                     * If there is no next station, we need to check if the front orders meets the requirements of completed
-                     * or incompleted
+                     * If there is no next station, we need to check if the front order meets the requirements of completed
+                     * or incomplete
                      */
 
                     // If the order is filled, move it to g_completed
